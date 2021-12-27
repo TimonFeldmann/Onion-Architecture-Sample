@@ -1,0 +1,38 @@
+﻿using Shopping.Domain;
+using Shopping.Service.Interfaces;
+using Shopping_Service.DTOs;
+
+namespace Shopping.Service.Services
+{
+    public class ShoppingListService
+    {
+        private readonly IShoppingListRepository _shoppingListRepository;
+        private readonly IShoppingListContext _shoppingListContext;
+
+        public ShoppingListService(IShoppingListRepository shoppingListRepository, IShoppingListContext shoppingListContext)
+        {
+            _shoppingListRepository = shoppingListRepository;
+            _shoppingListContext = shoppingListContext;
+        }
+
+        public async Task<ShoppingList?> GetShoppingListForUserAsync(Guid userId)
+        {
+            return await _shoppingListRepository.GetShoppingListForUser(userId);
+        }
+
+        public async Task<ShoppingList> CreateShoppingListForUserAsync(CreateShoppingListDto createShoppingListDto)
+        {
+            var userId = createShoppingListDto.userId;
+            var shoppingList = await _shoppingListRepository.GetShoppingListForUser(userId);
+
+            if (shoppingList == null)
+            {
+                shoppingList = await _shoppingListRepository.CreateShoppingList(createShoppingListDto);
+            }
+
+            await _shoppingListContext.SaveChangesAsync();
+
+            return shoppingList;
+        }
+    }
+}
