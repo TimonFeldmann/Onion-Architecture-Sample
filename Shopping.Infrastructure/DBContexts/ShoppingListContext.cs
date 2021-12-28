@@ -7,8 +7,8 @@ namespace Shopping.Infrastructure
 {
     internal class ShoppingListContext : DbContext, IShoppingListContext
     {
-        public DbSet<ShoppingList> ShoppingList { get; set; }
-        public DbSet<User> User { get; set; }
+        public DbSet<ShoppingList> ShoppingList { get; set; } = null!;
+        public DbSet<User> User { get; set; } = null!;
 
         public ShoppingListContext(DbContextOptions<ShoppingListContext> dbContextOptions) : base(dbContextOptions)
         {

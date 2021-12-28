@@ -12,6 +12,6 @@ namespace Shopping.Service.Interfaces
     public interface IShoppingListRepository
     {
         Task<ShoppingList?> GetShoppingListForUser(Guid userId);
-        Task<ShoppingList?> CreateShoppingList(CreateShoppingListDto shoppingListDto);
+        ShoppingList CreateShoppingList(CreateShoppingListDto shoppingListDto);
     }
 }

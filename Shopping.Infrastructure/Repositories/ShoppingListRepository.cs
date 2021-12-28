@@ -18,7 +18,7 @@ namespace Shopping.Infrastructure.Repositories
                 .Where(x => x.UserId == userId)
                 .FirstOrDefaultAsync() ;
         }
-        public async Task<ShoppingList> CreateShoppingList(CreateShoppingListDto createShoppingListDto)
+        public ShoppingList CreateShoppingList(CreateShoppingListDto createShoppingListDto)
         {
             var shoppingList = MapCreateToShoppingList(createShoppingListDto);
 

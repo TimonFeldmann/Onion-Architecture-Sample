@@ -27,7 +27,7 @@ namespace Shopping.Service.Services
 
             if (shoppingList == null)
             {
-                shoppingList = await _shoppingListRepository.CreateShoppingList(createShoppingListDto);
+                shoppingList = _shoppingListRepository.CreateShoppingList(createShoppingListDto);
             }
 
             await _shoppingListContext.SaveChangesAsync();

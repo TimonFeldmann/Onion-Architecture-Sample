@@ -14,6 +14,6 @@ namespace Shopping.Domain
         }
 
         public Guid Id { get; set; }
-        public ShoppingList ShoppingList { get; set; }
+        public ShoppingList ShoppingList { get; set; } = null!;
     }
 }

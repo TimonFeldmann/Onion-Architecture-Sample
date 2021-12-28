@@ -16,7 +16,7 @@ namespace Shopping.Domain
 
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
-        public List<ShoppingItem> ShoppingItems { get; set; }
+        public List<ShoppingItem> ShoppingItems { get; set; } = new List<ShoppingItem>();
 
     }
 }
