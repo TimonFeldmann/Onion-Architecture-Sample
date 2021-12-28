@@ -37,6 +37,10 @@ namespace Shopping.Service.Services
             {
                 shoppingList = _shoppingListRepository.CreateShoppingList(createShoppingListDto);
             }
+            else
+            {
+                throw new Exception($"Shopping list already exists for user {userId}.");
+            }
 
             await _shoppingListContext.SaveChangesAsync();
 
