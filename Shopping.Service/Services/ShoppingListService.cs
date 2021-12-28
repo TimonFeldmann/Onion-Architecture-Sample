@@ -1,7 +1,7 @@
 ﻿using Shopping.Domain.DTOs;
 using Shopping.Domain.Entities;
-using Shopping.Repository.Contexts;
-using Shopping.Repository.Repositories;
+using Shopping.RepositoryInterface.Contexts;
+using Shopping.RepositoryInterface.Repositories;
 
 namespace Shopping.Service.Services
 {

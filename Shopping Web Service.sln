@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shopping.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shopping.Domain", "Shopping.Domain\Shopping.Domain.csproj", "{846458B7-C83B-44AE-A0CC-F53FF6AAA6CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping.Repository", "Shopping.Repository\Shopping.Repository.csproj", "{166E20DB-C6A3-4ADB-8A84-15417D6D506F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping.RepositoryInterface", "Shopping.Repository\Shopping.RepositoryInterface.csproj", "{166E20DB-C6A3-4ADB-8A84-15417D6D506F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

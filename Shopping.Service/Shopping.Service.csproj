@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shopping.Repository\Shopping.Repository.csproj" />
+    <ProjectReference Include="..\Shopping.Repository\Shopping.RepositoryInterface.csproj" />
   </ItemGroup>
 
 </Project>

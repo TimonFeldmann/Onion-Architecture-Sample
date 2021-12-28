@@ -1,6 +1,6 @@
 ﻿using Shopping.Domain.Entities;
 
-namespace Shopping.Repository.Repositories
+namespace Shopping.RepositoryInterface.Repositories
 {
     public interface IUserRepository
     {

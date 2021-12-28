@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using Shopping.Repository.Contexts;
 using Shopping.Infrastructure.DBContexts;
+using Shopping.RepositoryInterface.Contexts;
 
 namespace Shopping.Infrastructure.Providers
 {

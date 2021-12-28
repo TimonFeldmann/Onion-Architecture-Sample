@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shopping.Domain.Entities;
-using Shopping.Repository.Contexts;
+using Shopping.RepositoryInterface.Contexts;
 using System.Reflection;
 
 namespace Shopping.Infrastructure.DBContexts

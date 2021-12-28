@@ -1,7 +1,7 @@
 ﻿using Shopping.Domain.DTOs;
 using Shopping.Domain.Entities;
 
-namespace Shopping.Repository.Repositories
+namespace Shopping.RepositoryInterface.Repositories
 {
     public interface IShoppingListRepository
     {
@@ -10,4 +10,3 @@ namespace Shopping.Repository.Repositories
         Task<ShoppingItem> CreateShoppingListItem(Guid shoppingListId, CreateShoppingItemDto createShoppingItemDto);
     }
 }
- 
