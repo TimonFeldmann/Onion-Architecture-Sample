@@ -1,4 +1,4 @@
-﻿namespace Shopping.Domain
+﻿namespace Shopping.Domain.Entities
 {
     public class User
     {

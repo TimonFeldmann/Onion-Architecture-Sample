@@ -7,7 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shopping.Repository\Shopping.Repository.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shopping.Domain\Shopping.Domain.csproj" />
   </ItemGroup>
 
 </Project>

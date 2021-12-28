@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Shopping.Domain;
-using Shopping.Service.Interfaces;
+using Shopping.Domain.Entities;
+using Shopping.Repository.Contexts;
 using System.Reflection;
 
-namespace Shopping.Infrastructure
+namespace Shopping.Infrastructure.DBContexts
 {
     internal class ShoppingListContext : DbContext, IShoppingListContext
     {

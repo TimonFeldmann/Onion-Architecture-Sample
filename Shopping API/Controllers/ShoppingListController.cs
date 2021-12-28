@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using Shopping.Domain.Entities;
+using Shopping.Repository.DTOs;
 using Shopping.Service.Services;
-using Shopping_Service.DTOs;
 
-namespace Shopping_API.Controllers
+namespace Shopping.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -17,8 +18,8 @@ namespace Shopping_API.Controllers
             _shoppingListService = shoppingListService;
         }
 
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> GetShoppingListForUser([FromRoute] Guid userId)
+        [HttpGet("{userId}", Name = "Get Shopping List for User")]
+        public async Task<ActionResult<ShoppingList?>> GetShoppingListForUser([FromRoute] Guid userId)
         {
             var shoppingList = await _shoppingListService.GetShoppingListForUserAsync(userId);
 
@@ -30,8 +31,8 @@ namespace Shopping_API.Controllers
             return Ok(shoppingList);
         }
 
-        [HttpPost("")]
-        public async Task<IActionResult> CreateShoppingListForUser([FromBody] CreateShoppingListDto createShoppingListDto)
+        [HttpPost("", Name = "Create Shopping List for User")]
+        public async Task<ActionResult<ShoppingList>> CreateShoppingListForUser([FromBody] CreateShoppingListDto createShoppingListDto)
         {
             var shoppingList = await _shoppingListService.CreateShoppingListForUserAsync(createShoppingListDto);
 

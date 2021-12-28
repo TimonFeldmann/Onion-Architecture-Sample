@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Shopping.Domain;
+using Shopping.Domain.Entities;
 
 namespace Shopping.Infrastructure.EntityConfigurations
 {

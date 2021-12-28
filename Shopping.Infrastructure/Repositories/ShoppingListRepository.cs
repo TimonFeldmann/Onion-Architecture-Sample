@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Shopping.Domain;
-using Shopping.Service.Interfaces;
-using Shopping_Service.DTOs;
+using Shopping.Domain.Entities;
+using Shopping.Repository.Contexts;
+using Shopping.Repository.DTOs;
+using Shopping.Repository.Repositories;
 
 namespace Shopping.Infrastructure.Repositories
 {

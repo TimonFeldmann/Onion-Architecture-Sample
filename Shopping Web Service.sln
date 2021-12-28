@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32002.185
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping.API", "Shopping API\Shopping.API.csproj", "{EEEE259C-D216-4A9B-873A-E30C1A42678D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shopping.API", "Shopping API\Shopping.API.csproj", "{EEEE259C-D216-4A9B-873A-E30C1A42678D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping.Service", "Shopping.Service\Shopping.Service.csproj", "{1232E76E-473D-4FC7-B58F-9053C01D745E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shopping.Service", "Shopping.Service\Shopping.Service.csproj", "{1232E76E-473D-4FC7-B58F-9053C01D745E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping.Infrastructure", "Shopping.Infrastructure\Shopping.Infrastructure.csproj", "{262629C4-9A0F-4E12-B9FF-127E508794B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shopping.Infrastructure", "Shopping.Infrastructure\Shopping.Infrastructure.csproj", "{262629C4-9A0F-4E12-B9FF-127E508794B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping.Domain", "Shopping.Domain\Shopping.Domain.csproj", "{846458B7-C83B-44AE-A0CC-F53FF6AAA6CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shopping.Domain", "Shopping.Domain\Shopping.Domain.csproj", "{846458B7-C83B-44AE-A0CC-F53FF6AAA6CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping.Repository", "Shopping.Repository\Shopping.Repository.csproj", "{166E20DB-C6A3-4ADB-8A84-15417D6D506F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{846458B7-C83B-44AE-A0CC-F53FF6AAA6CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{846458B7-C83B-44AE-A0CC-F53FF6AAA6CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{846458B7-C83B-44AE-A0CC-F53FF6AAA6CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{166E20DB-C6A3-4ADB-8A84-15417D6D506F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{166E20DB-C6A3-4ADB-8A84-15417D6D506F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{166E20DB-C6A3-4ADB-8A84-15417D6D506F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{166E20DB-C6A3-4ADB-8A84-15417D6D506F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Shopping.Domain;
+using Shopping.Domain.Entities;
 
-
-namespace Shopping.Infrastructure.Entity_Configurations
+namespace Shopping.Infrastructure.EntityConfigurations
 {
     public class ShoppingListConfiguration : IEntityTypeConfiguration<ShoppingList>
     {

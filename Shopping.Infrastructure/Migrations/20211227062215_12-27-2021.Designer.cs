@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Shopping.Infrastructure;
+using Shopping.Infrastructure.DBContexts;
 
 #nullable disable
 

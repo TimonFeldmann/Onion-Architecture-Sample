@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Shopping.Domain;
+using Shopping.Domain.Entities;
 
-namespace Shopping.Service.Interfaces
+namespace Shopping.Repository.Contexts
 {
     public interface IShoppingListContext
     {

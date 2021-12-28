@@ -1,7 +1,6 @@
-﻿using Shopping.Domain;
-using Shopping.Service.Interfaces;
-using Shopping.Service.Interfaces.Repositories;
-using Shopping_Service.DTOs;
+﻿using Shopping.Domain.Entities;
+using Shopping.Repository.Contexts;
+using Shopping.Repository.Repositories;
 
 namespace Shopping.Service.Services
 {
@@ -14,6 +13,11 @@ namespace Shopping.Service.Services
         {
             _userRepository = userRepository;
             _shoppingListContext = shoppingListContext;
+        }
+
+        public async Task<List<User>> GetAllUsers()
+        {
+            return await _userRepository.GetAllUsersAsync();
         }
 
         public async Task<User> CreateUserAsync(string name)

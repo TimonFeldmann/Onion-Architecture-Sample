@@ -1,11 +1,7 @@
-﻿using Shopping.Domain;
-using Shopping.Service.Interfaces;
-using Shopping.Service.Interfaces.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using Shopping.Domain.Entities;
+using Shopping.Repository.Contexts;
+using Shopping.Repository.Repositories;
 
 namespace Shopping.Infrastructure.Repositories
 {
@@ -17,6 +13,10 @@ namespace Shopping.Infrastructure.Repositories
             _shoppingListContext = shoppingListContext;
         }
 
+        public async Task<List<User>> GetAllUsersAsync()
+        {
+            return await _shoppingListContext.User.ToListAsync();
+        }
         public User CreateUser(string name)
         {
             var user = new User(name);

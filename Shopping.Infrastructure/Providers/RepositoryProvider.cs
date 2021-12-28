@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using Shopping.Service.Interfaces;
 using Shopping.Infrastructure.Repositories;
-using Shopping.Service.Interfaces.Repositories;
+using Shopping.Repository.Repositories;
 
 namespace Shopping.Infrastructure.Providers
 {
