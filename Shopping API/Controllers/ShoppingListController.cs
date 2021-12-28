@@ -52,7 +52,7 @@ namespace Shopping_API.Controllers
             return Ok(shoppingList);
         }
 
-        [HttpPost("{shoppingListId}/Item")]
+        [HttpPost("/Item/{shoppingListId}")]
         public async Task<ActionResult<ShoppingItem>> CreateShoppingListItem([FromRoute] Guid shoppingListId, [FromBody] CreateShoppingItemDto createShoppingItemDto)
         {
             var shoppingItem = await _shoppingListService.CreateShoppingListItemAsync(shoppingListId, createShoppingItemDto);
