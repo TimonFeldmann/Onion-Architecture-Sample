@@ -2,7 +2,7 @@
 using Shopping.Domain.Entities;
 using Shopping.Service.Services;
 
-namespace Shopping.API.Controllers
+namespace Shopping_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -16,7 +16,8 @@ namespace Shopping.API.Controllers
             _logger = logger;
             _userService = shoppingListService;
         }
-        [HttpGet(Name = "Get All Users")]
+
+        [HttpGet("/Users", Name = "Get All Users")]
         public async Task<ActionResult<List<User>>> GetAllUsers()
         {
             return await _userService.GetAllUsers();

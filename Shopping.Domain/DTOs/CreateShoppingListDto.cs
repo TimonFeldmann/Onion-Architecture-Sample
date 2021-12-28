@@ -1,4 +1,4 @@
-﻿namespace Shopping.Repository.DTOs
+﻿namespace Shopping.Domain.DTOs
 {
     public class CreateShoppingListDto
     {

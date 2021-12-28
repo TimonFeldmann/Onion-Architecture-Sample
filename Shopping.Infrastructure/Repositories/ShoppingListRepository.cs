@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Shopping.Domain.DTOs;
 using Shopping.Domain.Entities;
 using Shopping.Repository.Contexts;
-using Shopping.Repository.DTOs;
 using Shopping.Repository.Repositories;
 
 namespace Shopping.Infrastructure.Repositories
@@ -27,9 +27,23 @@ namespace Shopping.Infrastructure.Repositories
 
             return shoppingList;
         }
+
+        public async Task<ShoppingItem> CreateShoppingListItem(Guid shoppingListId, CreateShoppingItemDto createShoppingItemDto)
+        {
+            var shoppingList = await _shoppingListContext.ShoppingList.FindAsync(shoppingListId);
+
+            if (shoppingList == null)
+            {
+                throw new Exception($"Shopping list with id {shoppingListId} could not be found while creating a shopping list item");
+            }
+
+            var shoppingItem = shoppingList.AddShoppingItem(createShoppingItemDto);
+
+            return shoppingItem;
+        }
         private ShoppingList MapCreateToShoppingList(CreateShoppingListDto createShoppingListDto)
         {
-            return new ShoppingList(createShoppingListDto.userId);
+            return new ShoppingList(createShoppingListDto);
         }
     }
 }

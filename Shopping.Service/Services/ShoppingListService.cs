@@ -1,6 +1,6 @@
-﻿using Shopping.Domain.Entities;
+﻿using Shopping.Domain.DTOs;
+using Shopping.Domain.Entities;
 using Shopping.Repository.Contexts;
-using Shopping.Repository.DTOs;
 using Shopping.Repository.Repositories;
 
 namespace Shopping.Service.Services
@@ -14,6 +14,13 @@ namespace Shopping.Service.Services
         {
             _shoppingListRepository = shoppingListRepository;
             _shoppingListContext = shoppingListContext;
+        }
+
+        public async Task <ShoppingList?> GetShoppingListById(Guid id)
+        {
+            var shoppingList = await _shoppingListContext.ShoppingList.FindAsync(id);
+
+            return shoppingList;
         }
 
         public async Task<ShoppingList?> GetShoppingListForUserAsync(Guid userId)
@@ -34,6 +41,15 @@ namespace Shopping.Service.Services
             await _shoppingListContext.SaveChangesAsync();
 
             return shoppingList;
+        }
+
+        public async Task<ShoppingItem> CreateShoppingListItemAsync(Guid shoppingListId, CreateShoppingItemDto createShoppingItemDto)
+        {
+            var shoppingItem = await _shoppingListRepository.CreateShoppingListItem(shoppingListId, createShoppingItemDto);
+
+            await _shoppingListContext.SaveChangesAsync();
+
+            return shoppingItem;
         }
     }
 }

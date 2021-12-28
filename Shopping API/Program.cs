@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using Shopping.Infrastructure.Providers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,7 +7,10 @@ var configuration = builder.Configuration;
 
 // Add services to the container.
 
-services.AddControllers();
+services.AddControllers()
+    .AddNewtonsoftJson(options =>
+        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+    );
 
 services.AddDbContexts(configuration);
 services.AddRepositories(configuration);
