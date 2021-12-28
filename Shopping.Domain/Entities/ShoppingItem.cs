@@ -5,18 +5,24 @@ namespace Shopping.Domain.Entities
     public class ShoppingItem
     {
         private ShoppingItem() { }
-        public ShoppingItem(CreateShoppingItemDto createShoppingItemDto)
+        public ShoppingItem(CreateUpdateShoppingItemDto shoppingItemDto)
         {
             Id = Guid.NewGuid();
-            Price = createShoppingItemDto.Price;
-            Name = createShoppingItemDto.Name;
+            Price = shoppingItemDto.Price;
+            Name = shoppingItemDto.Name;
         }
 
         public Guid Id { get; set; }
 
-        public decimal Price { get; set; }
         public string Name { get; set; } = null!;
+        public decimal Price { get; set; }
 
         public ShoppingList ShoppingList { get; set; } = null!;
+
+        public void Update(CreateUpdateShoppingItemDto shoppingItemDto)
+        {
+            Name = shoppingItemDto.Name;
+            Price = shoppingItemDto.Price;
+        }
     }
 }

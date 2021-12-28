@@ -1,6 +1,6 @@
 ﻿namespace Shopping.Domain.DTOs
 {
-    public class CreateShoppingItemDto
+    public class CreateUpdateShoppingItemDto
     {
         public decimal Price { get; set; }
         public string Name { get; set; } = null!;

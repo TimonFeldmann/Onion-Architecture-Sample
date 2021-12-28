@@ -19,9 +19,9 @@ namespace Shopping_API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ShoppingList>> GetShoppingListById (Guid id)
+        public async Task<ActionResult<ShoppingList>> GetShoppingListById(Guid shoppingListId)
         {
-            var shoppingList = await _shoppingListService.GetShoppingListById(id);
+            var shoppingList = await _shoppingListService.GetShoppingListByIdAsync(shoppingListId);
 
             if (shoppingList == null)
             {
@@ -53,9 +53,17 @@ namespace Shopping_API.Controllers
         }
 
         [HttpPost("/Item/{shoppingListId}")]
-        public async Task<ActionResult<ShoppingItem>> CreateShoppingListItem([FromRoute] Guid shoppingListId, [FromBody] CreateShoppingItemDto createShoppingItemDto)
+        public async Task<ActionResult<ShoppingItem>> CreateShoppingListItem([FromRoute] Guid shoppingListId, [FromBody] CreateUpdateShoppingItemDto shoppingItemDto)
         {
-            var shoppingItem = await _shoppingListService.CreateShoppingListItemAsync(shoppingListId, createShoppingItemDto);
+            var shoppingItem = await _shoppingListService.CreateShoppingListItemAsync(shoppingListId, shoppingItemDto);
+
+            return Ok(shoppingItem);
+        }
+
+        [HttpPut("/Item/{shoppingListId}/{shoppingItemId}")]
+        public async Task<ActionResult<ShoppingItem>> UpdateShoppingListItem([FromRoute] Guid shoppingListId, [FromRoute] Guid shoppingItemId, CreateUpdateShoppingItemDto shoppingItemDto)
+        {
+            var shoppingItem = await _shoppingListService.UpdateShoppingListItemAsync(shoppingListId, shoppingItemId, shoppingItemDto);
 
             return Ok(shoppingItem);
         }

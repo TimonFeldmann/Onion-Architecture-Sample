@@ -13,6 +13,17 @@ namespace Shopping.Infrastructure.Repositories
         {
             _shoppingListContext = shoppingListContext;
         }
+        public async Task<ShoppingList> GetShoppingListByIdAsync(Guid shoppingListId)
+        {
+            var shoppingList = await _shoppingListContext.ShoppingList.FindAsync(shoppingListId);
+
+            if (shoppingList == null)
+            {
+                throw new Exception($"Shopping list with id {shoppingListId} could not be found while creating a shopping list item");
+            }
+
+            return shoppingList;
+        }
         public async Task<ShoppingList?> GetShoppingListForUser(Guid userId)
         {
             return await _shoppingListContext.ShoppingList
@@ -28,19 +39,22 @@ namespace Shopping.Infrastructure.Repositories
             return shoppingList;
         }
 
-        public async Task<ShoppingItem> CreateShoppingListItem(Guid shoppingListId, CreateShoppingItemDto createShoppingItemDto)
+        public async Task<ShoppingItem> CreateShoppingListItem(Guid shoppingListId, CreateUpdateShoppingItemDto shoppingItemDto)
         {
-            var shoppingList = await _shoppingListContext.ShoppingList.FindAsync(shoppingListId);
-
-            if (shoppingList == null)
-            {
-                throw new Exception($"Shopping list with id {shoppingListId} could not be found while creating a shopping list item");
-            }
-
-            var shoppingItem = shoppingList.AddShoppingItem(createShoppingItemDto);
+            var shoppingList = await GetShoppingListByIdAsync(shoppingListId);
+            var shoppingItem = shoppingList.AddShoppingItem(shoppingItemDto);
 
             return shoppingItem;
         }
+
+        public async Task<ShoppingItem> UpdateShoppingListItem(Guid shoppingListId, Guid shoppingItemId, CreateUpdateShoppingItemDto shoppingItemDto)
+        {
+            var shoppingList = await GetShoppingListByIdAsync(shoppingListId);
+            var shoppingItem = shoppingList.UpdateShoppingItem(shoppingItemId, shoppingItemDto);
+
+            return shoppingItem;
+        }
+
         private ShoppingList MapCreateToShoppingList(CreateShoppingListDto createShoppingListDto)
         {
             return new ShoppingList(createShoppingListDto);
