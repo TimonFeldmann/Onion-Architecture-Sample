@@ -16,14 +16,14 @@ namespace Shopping.Service.Services
             _shoppingListContext = shoppingListContext;
         }
 
-        public async Task<ShoppingList> GetShoppingListByIdAsync(Guid shoppingListId)
+        public async Task<ShoppingList> GetShoppingListById(Guid shoppingListId)
         {
-            var shoppingList = await _shoppingListRepository.GetShoppingListByIdAsync(shoppingListId);
+            var shoppingList = await _shoppingListRepository.GetShoppingListById(shoppingListId);
 
             return shoppingList;
         }
 
-        public async Task<ShoppingList?> GetShoppingListForUserAsync(Guid userId)
+        public async Task<ShoppingList?> GetShoppingListForUser(Guid userId)
         {
             return await _shoppingListRepository.GetShoppingListForUser(userId);
         }
@@ -47,7 +47,7 @@ namespace Shopping.Service.Services
             return shoppingList;
         }
 
-        public async Task<ShoppingItem> CreateShoppingListItemAsync(Guid shoppingListId, CreateUpdateShoppingItemDto shoppingItemDto)
+        public async Task<ShoppingItem> CreateShoppingListItem(Guid shoppingListId, CreateUpdateShoppingItemDto shoppingItemDto)
         {
             var shoppingItem = await _shoppingListRepository.CreateShoppingListItem(shoppingListId, shoppingItemDto);
 
@@ -56,7 +56,7 @@ namespace Shopping.Service.Services
             return shoppingItem;
         }
 
-        public async Task<ShoppingItem> UpdateShoppingListItemAsync(Guid shoppingListId, Guid shoppingItemId, CreateUpdateShoppingItemDto shoppingItemDto)
+        public async Task<ShoppingItem> UpdateShoppingListItem(Guid shoppingListId, Guid shoppingItemId, CreateUpdateShoppingItemDto shoppingItemDto)
         {
             var shoppingItem = await _shoppingListRepository.UpdateShoppingListItem(shoppingListId, shoppingItemId, shoppingItemDto);
 

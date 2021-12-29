@@ -5,7 +5,7 @@ namespace Shopping.RepositoryInterface.Repositories
 {
     public interface IUserRepository
     {
-        Task<List<User>> GetAllUsersAsync();
+        Task<List<User>> GetAllUsers();
         User CreateUser(CreateUserDto createUserDto);
     }
 }

@@ -18,10 +18,10 @@ namespace Shopping.Service.Services
 
         public async Task<List<User>> GetAllUsers()
         {
-            return await _userRepository.GetAllUsersAsync();
+            return await _userRepository.GetAllUsers();
         }
 
-        public async Task<User> CreateUserAsync(CreateUserDto createUserDto)
+        public async Task<User> CreateUser(CreateUserDto createUserDto)
         {
             var user = _userRepository.CreateUser(createUserDto);
 

@@ -27,7 +27,7 @@ namespace Shopping_API.Controllers
         [HttpPost("", Name = "Create User")]
         public async Task<ActionResult<User>> CreateUser([FromBody] CreateUserDto createUserDto)
         {
-            var user = await _userService.CreateUserAsync(createUserDto);
+            var user = await _userService.CreateUser(createUserDto);
 
             return Ok(user);
         }

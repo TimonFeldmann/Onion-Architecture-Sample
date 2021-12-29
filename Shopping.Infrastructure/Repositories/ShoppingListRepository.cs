@@ -13,7 +13,7 @@ namespace Shopping.Infrastructure.Repositories
         {
             _shoppingListContext = shoppingListContext;
         }
-        public async Task<ShoppingList> GetShoppingListByIdAsync(Guid shoppingListId)
+        public async Task<ShoppingList> GetShoppingListById(Guid shoppingListId)
         {
             var shoppingList = await _shoppingListContext.ShoppingList.FindAsync(shoppingListId);
 
@@ -48,7 +48,7 @@ namespace Shopping.Infrastructure.Repositories
 
         public async Task<ShoppingItem> CreateShoppingListItem(Guid shoppingListId, CreateUpdateShoppingItemDto shoppingItemDto)
         {
-            var shoppingList = await GetShoppingListByIdAsync(shoppingListId);
+            var shoppingList = await GetShoppingListById(shoppingListId);
             var shoppingItem = shoppingList.AddShoppingItem(shoppingItemDto);
 
             return shoppingItem;
@@ -56,7 +56,7 @@ namespace Shopping.Infrastructure.Repositories
 
         public async Task<ShoppingItem> UpdateShoppingListItem(Guid shoppingListId, Guid shoppingItemId, CreateUpdateShoppingItemDto shoppingItemDto)
         {
-            var shoppingList = await GetShoppingListByIdAsync(shoppingListId);
+            var shoppingList = await GetShoppingListById(shoppingListId);
             var shoppingItem = shoppingList.UpdateShoppingItem(shoppingItemId, shoppingItemDto);
 
             return shoppingItem;

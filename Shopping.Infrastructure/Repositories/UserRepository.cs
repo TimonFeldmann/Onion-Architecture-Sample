@@ -14,7 +14,7 @@ namespace Shopping.Infrastructure.Repositories
             _shoppingListContext = shoppingListContext;
         }
 
-        public async Task<List<User>> GetAllUsersAsync()
+        public async Task<List<User>> GetAllUsers()
         {
             return await _shoppingListContext.User.ToListAsync();
         }

@@ -21,7 +21,7 @@ namespace Shopping_API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ShoppingList>> GetShoppingListById(Guid shoppingListId)
         {
-            var shoppingList = await _shoppingListService.GetShoppingListByIdAsync(shoppingListId);
+            var shoppingList = await _shoppingListService.GetShoppingListById(shoppingListId);
 
             if (shoppingList == null)
             {
@@ -34,7 +34,7 @@ namespace Shopping_API.Controllers
         [HttpGet("User/{userId}", Name = "Get Shopping List for User")]
         public async Task<ActionResult<ShoppingList?>> GetShoppingListForUser([FromRoute] Guid userId)
         {
-            var shoppingList = await _shoppingListService.GetShoppingListForUserAsync(userId);
+            var shoppingList = await _shoppingListService.GetShoppingListForUser(userId);
 
             if (shoppingList == null)
             {
@@ -55,7 +55,7 @@ namespace Shopping_API.Controllers
         [HttpPost("{shoppingListId}/Item")]
         public async Task<ActionResult<ShoppingItem>> CreateShoppingListItem([FromRoute] Guid shoppingListId, [FromBody] CreateUpdateShoppingItemDto shoppingItemDto)
         {
-            var shoppingItem = await _shoppingListService.CreateShoppingListItemAsync(shoppingListId, shoppingItemDto);
+            var shoppingItem = await _shoppingListService.CreateShoppingListItem(shoppingListId, shoppingItemDto);
 
             return Ok(shoppingItem);
         }
@@ -63,7 +63,7 @@ namespace Shopping_API.Controllers
         [HttpPut("{shoppingListId}/Item/{shoppingItemId}")]
         public async Task<ActionResult<ShoppingItem>> UpdateShoppingListItem([FromRoute] Guid shoppingListId, [FromRoute] Guid shoppingItemId, CreateUpdateShoppingItemDto shoppingItemDto)
         {
-            var shoppingItem = await _shoppingListService.UpdateShoppingListItemAsync(shoppingListId, shoppingItemId, shoppingItemDto);
+            var shoppingItem = await _shoppingListService.UpdateShoppingListItem(shoppingListId, shoppingItemId, shoppingItemDto);
 
             return Ok(shoppingItem);
         }
