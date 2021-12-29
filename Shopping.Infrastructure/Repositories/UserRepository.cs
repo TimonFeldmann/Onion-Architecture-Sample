@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Shopping.Domain.DTOs;
 using Shopping.Domain.Entities;
 using Shopping.RepositoryInterface.Contexts;
 using Shopping.RepositoryInterface.Repositories;
@@ -17,9 +18,9 @@ namespace Shopping.Infrastructure.Repositories
         {
             return await _shoppingListContext.User.ToListAsync();
         }
-        public User CreateUser(string name)
+        public User CreateUser(CreateUserDto createUserDto)
         {
-            var user = new User(name);
+            var user = new User(createUserDto);
 
             _shoppingListContext.User.Add(user);
 

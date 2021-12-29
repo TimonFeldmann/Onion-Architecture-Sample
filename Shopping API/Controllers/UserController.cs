@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shopping.Domain.DTOs;
 using Shopping.Domain.Entities;
 using Shopping.Service.Services;
 
@@ -23,10 +24,10 @@ namespace Shopping_API.Controllers
             return await _userService.GetAllUsers();
         }
 
-        [HttpPost("{name}", Name = "Create User")]
-        public async Task<ActionResult<User>> CreateUser([FromRoute] string name)
+        [HttpPost("", Name = "Create User")]
+        public async Task<ActionResult<User>> CreateUser([FromBody] CreateUserDto createUserDto)
         {
-            var user = await _userService.CreateUserAsync(name);
+            var user = await _userService.CreateUserAsync(createUserDto);
 
             return Ok(user);
         }

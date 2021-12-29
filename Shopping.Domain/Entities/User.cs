@@ -1,11 +1,14 @@
-﻿namespace Shopping.Domain.Entities
+﻿using Shopping.Domain.DTOs;
+
+namespace Shopping.Domain.Entities
 {
     public class User
     {
-        public User(string name)
+        private User() { }
+        public User(CreateUserDto createUserDto)
         {
             Id = Guid.NewGuid();
-            Name = name;
+            Name = createUserDto.Name;
         }
 
         public Guid Id { get; set; }

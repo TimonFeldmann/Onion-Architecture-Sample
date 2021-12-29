@@ -9,7 +9,7 @@ namespace Shopping.Infrastructure.Repositories
     public class ShoppingListRepository : IShoppingListRepository
     {
         private IShoppingListContext _shoppingListContext { get; set; }
-        public ShoppingListRepository(IShoppingListContext shoppingListContext )
+        public ShoppingListRepository(IShoppingListContext shoppingListContext)
         {
             _shoppingListContext = shoppingListContext;
         }
@@ -19,20 +19,27 @@ namespace Shopping.Infrastructure.Repositories
 
             if (shoppingList == null)
             {
-                throw new Exception($"Shopping list with id {shoppingListId} could not be found while creating a shopping list item");
+                throw new Exception($"Shopping list with id {shoppingListId} could not be found.");
             }
 
             return shoppingList;
         }
-        public async Task<ShoppingList?> GetShoppingListForUser(Guid userId)
+        public async Task<ShoppingList> GetShoppingListForUser(Guid userId)
         {
-            return await _shoppingListContext.ShoppingList
+            var shoppingList = await _shoppingListContext.ShoppingList
                 .Where(x => x.UserId == userId)
-                .FirstOrDefaultAsync() ;
+                .FirstOrDefaultAsync();
+
+            if (shoppingList == null)
+            {
+                throw new Exception($"Shopping list for user id {userId} could not be found.");
+            }
+
+            return shoppingList;
         }
         public ShoppingList CreateShoppingList(CreateShoppingListDto createShoppingListDto)
         {
-            var shoppingList = MapCreateToShoppingList(createShoppingListDto);
+            var shoppingList = new ShoppingList(createShoppingListDto);
 
             _shoppingListContext.ShoppingList.Add(shoppingList);
 
@@ -53,11 +60,6 @@ namespace Shopping.Infrastructure.Repositories
             var shoppingItem = shoppingList.UpdateShoppingItem(shoppingItemId, shoppingItemDto);
 
             return shoppingItem;
-        }
-
-        private ShoppingList MapCreateToShoppingList(CreateShoppingListDto createShoppingListDto)
-        {
-            return new ShoppingList(createShoppingListDto);
         }
     }
 }

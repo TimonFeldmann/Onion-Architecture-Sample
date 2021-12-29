@@ -14,11 +14,11 @@ namespace Shopping.Domain.Entities
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public List<ShoppingItem> ShoppingItems { get; set; } = new List<ShoppingItem>();
-        
+
         public ShoppingItem AddShoppingItem(CreateUpdateShoppingItemDto shoppingItemDto)
         {
             var shoppingItem = new ShoppingItem(shoppingItemDto);
-            
+
             ShoppingItems.Add(shoppingItem);
 
             return shoppingItem;

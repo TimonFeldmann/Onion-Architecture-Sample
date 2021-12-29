@@ -31,7 +31,7 @@ namespace Shopping_API.Controllers
             return shoppingList;
         }
 
-        [HttpGet("/User/{userId}", Name = "Get Shopping List for User")]
+        [HttpGet("User/{userId}", Name = "Get Shopping List for User")]
         public async Task<ActionResult<ShoppingList?>> GetShoppingListForUser([FromRoute] Guid userId)
         {
             var shoppingList = await _shoppingListService.GetShoppingListForUserAsync(userId);
@@ -44,15 +44,15 @@ namespace Shopping_API.Controllers
             return Ok(shoppingList);
         }
 
-        [HttpPost("", Name = "Create Shopping List for User")]
-        public async Task<ActionResult<ShoppingList>> CreateShoppingListForUser([FromBody] CreateShoppingListDto createShoppingListDto)
+        [HttpPost("", Name = "Create Shopping List")]
+        public async Task<ActionResult<ShoppingList>> CreateShoppingList([FromBody] CreateShoppingListDto createShoppingListDto)
         {
-            var shoppingList = await _shoppingListService.CreateShoppingListForUserAsync(createShoppingListDto);
+            var shoppingList = await _shoppingListService.CreateShoppingList(createShoppingListDto);
 
             return Ok(shoppingList);
         }
 
-        [HttpPost("/Item/{shoppingListId}")]
+        [HttpPost("{shoppingListId}/Item")]
         public async Task<ActionResult<ShoppingItem>> CreateShoppingListItem([FromRoute] Guid shoppingListId, [FromBody] CreateUpdateShoppingItemDto shoppingItemDto)
         {
             var shoppingItem = await _shoppingListService.CreateShoppingListItemAsync(shoppingListId, shoppingItemDto);
@@ -60,7 +60,7 @@ namespace Shopping_API.Controllers
             return Ok(shoppingItem);
         }
 
-        [HttpPut("/Item/{shoppingListId}/{shoppingItemId}")]
+        [HttpPut("{shoppingListId}/Item/{shoppingItemId}")]
         public async Task<ActionResult<ShoppingItem>> UpdateShoppingListItem([FromRoute] Guid shoppingListId, [FromRoute] Guid shoppingItemId, CreateUpdateShoppingItemDto shoppingItemDto)
         {
             var shoppingItem = await _shoppingListService.UpdateShoppingListItemAsync(shoppingListId, shoppingItemId, shoppingItemDto);

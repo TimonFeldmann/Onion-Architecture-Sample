@@ -1,4 +1,5 @@
-﻿using Shopping.Domain.Entities;
+﻿using Shopping.Domain.DTOs;
+using Shopping.Domain.Entities;
 using Shopping.RepositoryInterface.Contexts;
 using Shopping.RepositoryInterface.Repositories;
 
@@ -20,9 +21,9 @@ namespace Shopping.Service.Services
             return await _userRepository.GetAllUsersAsync();
         }
 
-        public async Task<User> CreateUserAsync(string name)
+        public async Task<User> CreateUserAsync(CreateUserDto createUserDto)
         {
-            var user = _userRepository.CreateUser(name);
+            var user = _userRepository.CreateUser(createUserDto);
 
             await _shoppingListContext.SaveChangesAsync();
 
