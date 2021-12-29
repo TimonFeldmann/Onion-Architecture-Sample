@@ -11,9 +11,9 @@ namespace Shopping.Domain.Entities
             UserId = shoppingListDto.userId;
         }
 
-        public Guid Id { get; set; }
-        public Guid UserId { get; set; }
-        public List<ShoppingItem> ShoppingItems { get; set; } = new List<ShoppingItem>();
+        public Guid Id { get; private set; }
+        public Guid UserId { get; private set; }
+        public List<ShoppingItem> ShoppingItems { get; private set; } = new List<ShoppingItem>();
 
         public ShoppingItem AddShoppingItem(CreateUpdateShoppingItemDto shoppingItemDto)
         {

@@ -12,10 +12,10 @@ namespace Shopping.Domain.Entities
             Name = shoppingItemDto.Name;
         }
 
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
 
-        public string Name { get; set; } = null!;
-        public decimal Price { get; set; }
+        public string Name { get; private set; } = null!;
+        public decimal Price { get; private set; }
 
         public ShoppingList ShoppingList { get; set; } = null!;
 
