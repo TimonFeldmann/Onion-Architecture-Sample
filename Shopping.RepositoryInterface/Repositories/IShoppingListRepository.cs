@@ -6,7 +6,7 @@ namespace Shopping.RepositoryInterface.Repositories
     public interface IShoppingListRepository
     {
         Task<ShoppingList> GetShoppingListById(Guid shoppingListId);
-        Task<ShoppingList> GetShoppingListForUser(Guid userId);
+        Task<ShoppingList?> GetShoppingListForUser(Guid userId);
         ShoppingList CreateShoppingList(CreateShoppingListDto shoppingListDto);
         Task<ShoppingItem> CreateShoppingListItem(Guid shoppingListId, CreateUpdateShoppingItemDto shoppingItemDto);
         Task<ShoppingItem> UpdateShoppingListItem(Guid shoppingListId, Guid shoppingListItemId, CreateUpdateShoppingItemDto shoppingItemDto);

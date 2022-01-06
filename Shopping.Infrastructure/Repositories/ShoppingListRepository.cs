@@ -24,16 +24,11 @@ namespace Shopping.Infrastructure.Repositories
 
             return shoppingList;
         }
-        public async Task<ShoppingList> GetShoppingListForUser(Guid userId)
+        public async Task<ShoppingList?> GetShoppingListForUser(Guid userId)
         {
             var shoppingList = await _shoppingListContext.ShoppingList
                 .Where(x => x.UserId == userId)
                 .FirstOrDefaultAsync();
-
-            if (shoppingList == null)
-            {
-                throw new Exception($"Shopping list for user id {userId} could not be found.");
-            }
 
             return shoppingList;
         }
