@@ -8,16 +8,17 @@ namespace Shopping.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<ShoppingList> builder)
         {
-            var shoppingItemBuilder = builder
-                .OwnsMany(shoppingList => shoppingList.ShoppingItems);
+            builder.OwnsMany(shoppingList => shoppingList.ShoppingItems, shoppingItemBuilder => {
+                    shoppingItemBuilder.HasKey(x => x.Id);
+                    shoppingItemBuilder.Property(x => x.Id).ValueGeneratedNever();
+
+                    shoppingItemBuilder.WithOwner(x => x.ShoppingList);
+                });
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedNever();
-            builder.HasOne<User>().WithOne().HasForeignKey<ShoppingList>(x => x.UserId);
 
-            shoppingItemBuilder.WithOwner(x => x.ShoppingList);
-            shoppingItemBuilder.HasKey(x => x.Id);
-            shoppingItemBuilder.Property(x => x.Id).ValueGeneratedNever();
+            builder.HasOne<User>().WithOne().HasForeignKey<ShoppingList>(x => x.UserId);
         }
     }
 }

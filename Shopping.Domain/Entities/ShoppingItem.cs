@@ -1,18 +1,17 @@
 ﻿using Shopping.Domain.DTOs;
+using Shopping.Domain.Events;
+using Shopping.Domain.Generic;
 
 namespace Shopping.Domain.Entities
 {
-    public class ShoppingItem
+    public class ShoppingItem : EventEntity
     {
         private ShoppingItem() { }
         public ShoppingItem(CreateUpdateShoppingItemDto shoppingItemDto)
         {
-            Id = Guid.NewGuid();
             Price = shoppingItemDto.Price;
             Name = shoppingItemDto.Name;
         }
-
-        public Guid Id { get; private set; }
 
         public string Name { get; private set; } = null!;
         public decimal Price { get; private set; }

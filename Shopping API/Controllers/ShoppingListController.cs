@@ -19,9 +19,9 @@ namespace Shopping_API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ShoppingList>> GetShoppingListById(Guid shoppingListId)
+        public async Task<ActionResult<ShoppingList>> GetShoppingListById(Guid id)
         {
-            var shoppingList = await _shoppingListService.GetShoppingListById(shoppingListId);
+            var shoppingList = await _shoppingListService.GetShoppingListById(id);
 
             if (shoppingList == null)
             {
@@ -31,10 +31,10 @@ namespace Shopping_API.Controllers
             return shoppingList;
         }
 
-        [HttpGet("User/{userId}", Name = "Get Shopping List for User")]
-        public async Task<ActionResult<ShoppingList?>> GetShoppingListForUser([FromRoute] Guid userId)
+        [HttpGet("User/{id}", Name = "Get Shopping List for User")]
+        public async Task<ActionResult<ShoppingList?>> GetShoppingListForUser([FromRoute] Guid id)
         {
-            var shoppingList = await _shoppingListService.GetShoppingListForUser(userId);
+            var shoppingList = await _shoppingListService.GetShoppingListForUser(id);
 
             if (shoppingList == null)
             {

@@ -1,25 +1,36 @@
 ﻿using Shopping.Domain.DTOs;
+using Shopping.Domain.Enumerables;
+using Shopping.Domain.Events;
+using Shopping.Domain.Generic;
 
 namespace Shopping.Domain.Entities
 {
-    public class ShoppingList
+    public class ShoppingList : EventEntity
     {
         private ShoppingList() { }
         public ShoppingList(CreateShoppingListDto shoppingListDto)
         {
-            Id = Guid.NewGuid();
             UserId = shoppingListDto.userId;
+
+            CreateUpdateEvent(ShoppingListUpdateType.Create);
         }
 
-        public Guid Id { get; private set; }
         public Guid UserId { get; private set; }
         public List<ShoppingItem> ShoppingItems { get; private set; } = new List<ShoppingItem>();
+        public decimal ShoppingListTotalValue
+        {
+            get => ShoppingItems
+                .Select(x => x.Price)
+                .Aggregate((decimal)0, (agggregate, current) => agggregate + current);
+        }
 
         public ShoppingItem AddShoppingItem(CreateUpdateShoppingItemDto shoppingItemDto)
         {
             var shoppingItem = new ShoppingItem(shoppingItemDto);
 
             ShoppingItems.Add(shoppingItem);
+
+            CreateUpdateEvent(ShoppingListUpdateType.Update);
 
             return shoppingItem;
         }
@@ -35,6 +46,8 @@ namespace Shopping.Domain.Entities
 
             shoppingItem.Update(shoppingItemDto);
 
+            CreateUpdateEvent(ShoppingListUpdateType.Update);
+
             return shoppingItem;
         }
 
@@ -49,7 +62,20 @@ namespace Shopping.Domain.Entities
 
             ShoppingItems.Remove(shoppingItem);
 
+            CreateUpdateEvent(ShoppingListUpdateType.Delete);
+
             return shoppingItem;
+        }
+
+        private void CreateUpdateEvent(ShoppingListUpdateType shoppingListUpdateType)
+        {
+            DomainEvents.Add(new ShoppingListUpdatedEvent()
+            {
+                ShoppingList = this,
+                ShoppingItems = ShoppingItems,
+                ShoppingListTotalValue = ShoppingListTotalValue,
+                ShoppingListUpdateType = shoppingListUpdateType
+            });
         }
     }
 }

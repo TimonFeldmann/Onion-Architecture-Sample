@@ -7,25 +7,34 @@ namespace Shopping.Service.Services
 {
     public class UserService
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IShoppingListContext _shoppingListContext;
+        private readonly IUserRepository UserRepository;
+        private readonly IShoppingListContext ShoppingListContext;
 
         public UserService(IUserRepository userRepository, IShoppingListContext shoppingListContext)
         {
-            _userRepository = userRepository;
-            _shoppingListContext = shoppingListContext;
+            UserRepository = userRepository;
+            ShoppingListContext = shoppingListContext;
         }
 
-        public async Task<List<User>> GetAllUsers()
+        public IQueryable<User> GetUsersQueryable()
         {
-            return await _userRepository.GetAllUsers();
+            return UserRepository.GetUsersQueryable();
         }
 
         public async Task<User> CreateUser(CreateUserDto createUserDto)
         {
-            var user = _userRepository.CreateUser(createUserDto);
+            var user = UserRepository.CreateUser(createUserDto);
 
-            await _shoppingListContext.SaveChangesAsync();
+            await ShoppingListContext.SaveChangesAsync();
+
+            return user;
+        }
+
+        public async Task<User> UpdateUser(Guid id, UpdateUserDto updateUserDto)
+        {
+            var user = await UserRepository.UpdateUser(id, updateUserDto);
+
+            await ShoppingListContext.SaveChangesAsync();
 
             return user;
         }

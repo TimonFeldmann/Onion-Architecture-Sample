@@ -1,17 +1,28 @@
 ﻿using Shopping.Domain.DTOs;
+using Shopping.Domain.Events;
+using Shopping.Domain.Generic;
 
 namespace Shopping.Domain.Entities
 {
-    public class User
+    public class User : EventEntity
     {
         private User() { }
         public User(CreateUserDto createUserDto)
         {
-            Id = Guid.NewGuid();
             Name = createUserDto.Name;
         }
 
-        public Guid Id { get; private set; }
         public string Name { get; private set; } = null!;
+
+        public void UpdateUser(string newName)
+        {
+            Name = newName;
+
+            AddDomainEvent(new UserUpdatedEvent()
+            {
+                Id = Id,
+                Name = Name
+            });
+        }
     }
 }
