@@ -1,7 +1,9 @@
-﻿using Dasync.Collections;
+﻿
+using Dasync.Collections;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Shopping.Domain.Entities;
+using Shopping.Domain.Events;
 using Shopping.Domain.Generic;
 using Shopping.Domain.View_Entities;
 using Shopping.RepositoryInterface.Contexts;
@@ -32,19 +34,23 @@ namespace Shopping.Infrastructure.DBContexts
                 .Entries<EventEntity>()
                 .Select(x => x.Entity)
                 .ToList();
-            var domainEvents = eventEntities
-                .SelectMany(x => x.DomainEvents)
-                .ToList();
-            var integrationEvents = eventEntities
-                .SelectMany(x => x.IntegrationEvents)
+            var events = eventEntities
+                .SelectMany(x => x.Events)
                 .ToList();
 
-            await domainEvents.ParallelForEachAsync(async domainEvent => await Mediator.Publish(domainEvent));
+            await events.ParallelForEachAsync(async entityEvent => {
+                entityEvent.NotificationEventType = NotificationEventType.Domain;
+
+                await Mediator.Publish(entityEvent);
+            });
 
             var saveResult = await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
 
-            integrationEvents.ForEach(integrationEvent => Mediator.Publish(integrationEvent));
+            await events.ParallelForEachAsync(async entityEvent => {
+                entityEvent.NotificationEventType = NotificationEventType.Integration;
 
+                await Mediator.Publish(entityEvent);
+            });
             return saveResult;
         }
     }

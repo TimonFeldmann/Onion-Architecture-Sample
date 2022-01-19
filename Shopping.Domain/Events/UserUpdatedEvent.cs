@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace Shopping.Domain.Events
 {
-    public class UserUpdatedEvent : INotification
+    public class UserUpdatedEvent : ICustomNotification
     {
+        public NotificationEventType NotificationEventType { get; set; }
         public Guid Id { get; set; }
         public string Name { get; set; } = null!;
     }

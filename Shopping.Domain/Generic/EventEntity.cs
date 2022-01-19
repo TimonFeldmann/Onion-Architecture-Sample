@@ -1,6 +1,6 @@
 ﻿
 using MediatR;
-using System.ComponentModel.DataAnnotations;
+using Shopping.Domain.Events;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Shopping.Domain.Generic
@@ -14,18 +14,11 @@ namespace Shopping.Domain.Generic
 
         public Guid Id { get; private set; }
         [NotMapped]
-        public List<INotification> DomainEvents { get; protected set; } = new List<INotification>();
-        [NotMapped]
-        public List<INotification> IntegrationEvents { get; protected set; } = new List<INotification>();
+        public List<ICustomNotification> Events { get; protected set; } = new List<ICustomNotification>();
 
-        protected void AddDomainEvent(INotification domainEvent)
+        protected void AddEvent(ICustomNotification domainEvent)
         {
-            DomainEvents.Add(domainEvent);
+            Events.Add(domainEvent);
         } 
-
-        protected void AddIntegrationEvent(INotification integrationEvent)
-        {
-            IntegrationEvents.Add(integrationEvent);
-        }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Attributes;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
@@ -10,45 +12,45 @@ namespace Shopping_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UserController : ODataController
+    public class UserController : ControllerBase
     {
-        private readonly ILogger<UserController> _logger;
-        private readonly UserService _userService;
+        private readonly ILogger<UserController> Logger;
+        private readonly UserService UserService;
 
         public UserController(ILogger<UserController> logger, UserService shoppingListService)
         {
-            _logger = logger;
-            _userService = shoppingListService;
+            Logger = logger;
+            UserService = shoppingListService;
         }
-        [HttpGet("{id}", Name = "Get User")]
-        public async Task<ActionResult<User>> GetUser([FromRoute] Guid id)
+        [HttpGet("{id}", Name = "Get User By Id")]
+        public async Task<ActionResult<UserDto>> GetUserById([FromRoute] Guid id)
         {
-            var user = await _userService.GetUser(id);
+            var user = await UserService.GetUser(id);
 
             return Ok(new UserDto(user));
         }
 
         [HttpPost("", Name = "Create User")]
-        public async Task<ActionResult<User>> CreateUser([FromBody] CreateUserDto createUserDto)
+        public async Task<ActionResult<UserDto>> CreateUser([FromBody] CreateUserDto createUserDto)
         {
-            var user = await _userService.CreateUser(createUserDto);
+            var user = await UserService.CreateUser(createUserDto);
 
-            return Ok(user);
+            return Ok(new UserDto(user));
         }
 
         [HttpPut("{id}", Name = "Update User")]
-        public async Task<ActionResult<User>> UpdateUser([FromBody] UpdateUserDto updateUserDto, [FromRoute] Guid id)
+        public async Task<ActionResult<UserDto>> UpdateUser([FromBody] UpdateUserDto updateUserDto, [FromRoute] Guid id)
         {
-            var user = await _userService.UpdateUser(id, updateUserDto);
+            var user = await UserService.UpdateUser(id, updateUserDto);
 
-            return Ok(user);
+            return Ok(new UserDto(user));
         }
 
         [EnableQuery]
-        [HttpGet("/odata/User")]
-        public ActionResult<IQueryable<User>> GetODataUser()
+        [HttpGet("/odata/User", Name = "Get OData User")]
+        public ActionResult<IQueryable<UserDto>> GetODataUserDto()
         {
-            return Ok(_userService.GetUsersQueryable());
+            return Ok(UserService.GetUserDtoQueryable());
         }
     }
 }

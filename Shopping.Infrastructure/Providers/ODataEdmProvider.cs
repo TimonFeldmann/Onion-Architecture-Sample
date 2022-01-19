@@ -4,6 +4,7 @@ using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using Shopping.Domain.DTOs;
 using Shopping.Domain.Entities;
+using Shopping.Domain.View_Entities;
 
 namespace Shopping.Infrastructure.Providers
 {
@@ -17,6 +18,7 @@ namespace Shopping.Infrastructure.Providers
 
             AddUserConfiguration();
             AddShoppingListConfiguration();
+            AddShoppingListReportConfiguration();
         }
         public IEdmModel GetEdmModel()
         {
@@ -25,7 +27,7 @@ namespace Shopping.Infrastructure.Providers
 
         private void AddUserConfiguration()
         {
-            var configuration = EdmModelBuilder.EntitySet<User>("User");
+            var configuration = EdmModelBuilder.EntitySet<UserDto>("User");
             var entityType = configuration.EntityType;
 
             entityType.HasKey(x => x.Id);
@@ -43,6 +45,19 @@ namespace Shopping.Infrastructure.Providers
             entityType.CollectionProperty(x => x.ShoppingItems);
 
             entityType.Property(x => x.UserId);
+            entityType.Property(x => x.ShoppingListTotalValue);
+        }
+        private void AddShoppingListReportConfiguration()
+        {
+            var configuration = EdmModelBuilder.EntitySet<ShoppingListReport>("ShoppingListReport");
+            var entityType = configuration.EntityType;
+
+            entityType.HasKey(x => x.Id);
+
+            entityType.Property(x => x.ShoppingListId);
+            entityType.Property(x => x.UserId);
+            entityType.Property(x => x.UserName);
+            entityType.Property(x => x.ShoppingItemNames);
             entityType.Property(x => x.ShoppingListTotalValue);
         }
     }

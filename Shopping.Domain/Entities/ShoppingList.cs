@@ -73,7 +73,7 @@ namespace Shopping.Domain.Entities
 
         private void CreateUpdateEvent(ShoppingListUpdateType shoppingListUpdateType)
         {
-            DomainEvents.Add(new ShoppingListUpdatedEvent()
+            AddEvent(new ShoppingListUpdatedEvent()
             {
                 ShoppingList = this,
                 ShoppingItems = ShoppingItems,

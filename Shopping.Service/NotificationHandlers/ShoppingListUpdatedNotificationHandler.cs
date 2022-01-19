@@ -17,16 +17,24 @@ namespace Shopping.Service.NotificationHandlers
 
         public async Task Handle(ShoppingListUpdatedEvent shoppingListUpdatedEvent, CancellationToken cancellationToken)
         {
+            if (shoppingListUpdatedEvent.NotificationEventType == NotificationEventType.Domain)
+            {
+                await HandleDomainEvent(shoppingListUpdatedEvent, cancellationToken);
+            }
+        }
+
+        private async Task HandleDomainEvent(ShoppingListUpdatedEvent shoppingListUpdatedEvent, CancellationToken cancellationToken)
+        {
             var shoppingListUpdateType = shoppingListUpdatedEvent.ShoppingListUpdateType;
 
             if (shoppingListUpdateType == ShoppingListUpdateType.Create)
             {
-                await ShoppingListRepository.CreateShoppingListReport(shoppingListUpdatedEvent); 
+                await ShoppingListRepository.CreateShoppingListReport(shoppingListUpdatedEvent);
             }
 
             if (shoppingListUpdateType == ShoppingListUpdateType.Update || shoppingListUpdateType == ShoppingListUpdateType.Delete)
             {
-                await ShoppingListRepository.UpdateShoppingListReport(shoppingListUpdatedEvent); 
+                await ShoppingListRepository.UpdateShoppingListReport(shoppingListUpdatedEvent);
             }
         }
     }

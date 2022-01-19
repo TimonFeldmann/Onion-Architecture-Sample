@@ -53,5 +53,12 @@ namespace Shopping.Infrastructure.Repositories
 
             return user;
         }
+
+        public IQueryable<UserDto> ConvertToUserDtoQueryable(IQueryable<User> userQueryable)
+        {
+            return userQueryable
+                .AsNoTracking()
+                .Select(x => new UserDto(x));
+        }
     }
 }

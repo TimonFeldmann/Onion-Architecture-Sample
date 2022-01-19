@@ -1,5 +1,6 @@
 ﻿using Shopping.Domain.DTOs;
 using Shopping.Domain.Entities;
+using Shopping.Domain.View_Entities;
 using Shopping.RepositoryInterface.Contexts;
 using Shopping.RepositoryInterface.Repositories;
 
@@ -31,6 +32,11 @@ namespace Shopping.Service.Services
         public IQueryable<ShoppingListDto> GetShoppingListDtoQueryable()
         {
             return ShoppingListRepository.ConvertToShoppingListDtoQueryable(ShoppingListContext.ShoppingList);
+        }
+
+        public IQueryable<ShoppingListReport> GetShoppingListReportQueryable()
+        {
+            return ShoppingListContext.ShoppingListReport;
         }
 
         public async Task<ShoppingList> CreateShoppingList(CreateShoppingListDto createShoppingListDto)

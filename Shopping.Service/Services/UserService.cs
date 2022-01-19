@@ -16,9 +16,9 @@ namespace Shopping.Service.Services
             ShoppingListContext = shoppingListContext;
         }
 
-        public IQueryable<User> GetUsersQueryable()
+        public IQueryable<UserDto> GetUserDtoQueryable()
         {
-            return UserRepository.GetUsersQueryable();
+            return UserRepository.ConvertToUserDtoQueryable(ShoppingListContext.User);
         }
 
         public async Task<User> GetUser(Guid id)

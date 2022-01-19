@@ -81,5 +81,12 @@ namespace Shopping_API.Controllers
         {
             return Ok(ShoppinggListService.GetShoppingListDtoQueryable());
         }
+
+        [EnableQuery]
+        [HttpGet("/odata/ShoppingListReport")]
+        public ActionResult<IQueryable<ShoppingListDto>> GetODataShoppingListReport()
+        {
+            return Ok(ShoppinggListService.GetShoppingListReportQueryable());
+        }
     }
 }

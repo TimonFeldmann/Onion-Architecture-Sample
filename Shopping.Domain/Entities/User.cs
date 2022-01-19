@@ -18,7 +18,7 @@ namespace Shopping.Domain.Entities
         {
             Name = newName;
 
-            AddDomainEvent(new UserUpdatedEvent()
+            AddEvent(new UserUpdatedEvent()
             {
                 Id = Id,
                 Name = Name
