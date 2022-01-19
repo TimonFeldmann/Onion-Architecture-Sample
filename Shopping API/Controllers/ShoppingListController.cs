@@ -1,71 +1,85 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
+using Microsoft.EntityFrameworkCore;
 using Shopping.Domain.DTOs;
 using Shopping.Domain.Entities;
+using Shopping.RepositoryInterface.Contexts;
 using Shopping.Service.Services;
 
 namespace Shopping_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ShoppingListController : ControllerBase
+    public class ShoppingListController : ODataController
     {
-        private readonly ILogger<ShoppingListController> _logger;
-        private readonly ShoppingListService _shoppingListService;
+        private readonly ILogger<ShoppingListController> Loggger;
+        private readonly ShoppingListService ShoppinggListService;
+        private readonly IShoppingListContext ShoppingListContext;
 
-        public ShoppingListController(ILogger<ShoppingListController> logger, ShoppingListService shoppingListService)
+        public ShoppingListController(ILogger<ShoppingListController> logger, ShoppingListService shoppingListService, IShoppingListContext shoppingListContext)
         {
-            _logger = logger;
-            _shoppingListService = shoppingListService;
+            Loggger = logger;
+            ShoppinggListService = shoppingListService;
+            ShoppingListContext = shoppingListContext;
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ShoppingList>> GetShoppingListById(Guid id)
+        public async Task<ActionResult<ShoppingListDto>> GetShoppingListById(Guid id)
         {
-            var shoppingList = await _shoppingListService.GetShoppingListById(id);
+            var shoppingList = await ShoppinggListService.GetShoppingListById(id);
 
             if (shoppingList == null)
             {
                 return NotFound();
             }
 
-            return shoppingList;
+            return Ok(new ShoppingListDto(shoppingList));
         }
 
         [HttpGet("User/{id}", Name = "Get Shopping List for User")]
-        public async Task<ActionResult<ShoppingList?>> GetShoppingListForUser([FromRoute] Guid id)
+        public async Task<ActionResult<ShoppingListDto?>> GetShoppingListForUser([FromRoute] Guid id)
         {
-            var shoppingList = await _shoppingListService.GetShoppingListForUser(id);
+            var shoppingList = await ShoppinggListService.GetShoppingListForUser(id);
 
             if (shoppingList == null)
             {
                 return NotFound();
             }
 
-            return Ok(shoppingList);
+            return Ok(new ShoppingListDto(shoppingList));
         }
 
         [HttpPost("", Name = "Create Shopping List")]
-        public async Task<ActionResult<ShoppingList>> CreateShoppingList([FromBody] CreateShoppingListDto createShoppingListDto)
+        public async Task<ActionResult<ShoppingListDto>> CreateShoppingList([FromBody] CreateShoppingListDto createShoppingListDto)
         {
-            var shoppingList = await _shoppingListService.CreateShoppingList(createShoppingListDto);
+            var shoppingList = await ShoppinggListService.CreateShoppingList(createShoppingListDto);
 
-            return Ok(shoppingList);
+            return Ok(new ShoppingListDto(shoppingList));
         }
 
         [HttpPost("{shoppingListId}/Item")]
-        public async Task<ActionResult<ShoppingItem>> CreateShoppingListItem([FromRoute] Guid shoppingListId, [FromBody] CreateUpdateShoppingItemDto shoppingItemDto)
+        public async Task<ActionResult<ShoppingItemDto>> CreateShoppingListItem([FromRoute] Guid shoppingListId, [FromBody] CreateUpdateShoppingItemDto shoppingItemDto)
         {
-            var shoppingItem = await _shoppingListService.CreateShoppingListItem(shoppingListId, shoppingItemDto);
+            var shoppingItem = await ShoppinggListService.CreateShoppingListItem(shoppingListId, shoppingItemDto);
 
-            return Ok(shoppingItem);
+            return Ok(new ShoppingItemDto(shoppingItem));
         }
 
         [HttpPut("{shoppingListId}/Item/{shoppingItemId}")]
-        public async Task<ActionResult<ShoppingItem>> UpdateShoppingListItem([FromRoute] Guid shoppingListId, [FromRoute] Guid shoppingItemId, CreateUpdateShoppingItemDto shoppingItemDto)
+        public async Task<ActionResult<ShoppingItemDto>> UpdateShoppingListItem([FromRoute] Guid shoppingListId, [FromRoute] Guid shoppingItemId, CreateUpdateShoppingItemDto shoppingItemDto)
         {
-            var shoppingItem = await _shoppingListService.UpdateShoppingListItem(shoppingListId, shoppingItemId, shoppingItemDto);
+            var shoppingItem = await ShoppinggListService.UpdateShoppingListItem(shoppingListId, shoppingItemId, shoppingItemDto);
 
-            return Ok(shoppingItem);
+            return Ok(new ShoppingItemDto(shoppingItem));
+
+        }
+
+        [EnableQuery]
+        [HttpGet("/odata/ShoppingList")]
+        public ActionResult<IQueryable<ShoppingListDto>> GetODataShoppingList()
+        {
+            return Ok(ShoppinggListService.GetShoppingListDtoQueryable());
         }
     }
 }

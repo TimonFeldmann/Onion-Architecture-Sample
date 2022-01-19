@@ -22,7 +22,7 @@ services.AddControllers()
         var oDataEdmProvider = new ODataEdmProvider();
 
         options.AddRouteComponents("odata", oDataEdmProvider.GetEdmModel());
-        options.Select().Filter().OrderBy();
+        options.Select().Filter().OrderBy().Expand().Count().SetMaxTop(null);
      });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

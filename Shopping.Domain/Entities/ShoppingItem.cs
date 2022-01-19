@@ -16,6 +16,7 @@ namespace Shopping.Domain.Entities
         public string Name { get; private set; } = null!;
         public decimal Price { get; private set; }
 
+        public Guid ShoppingListId { get; set; }
         public ShoppingList ShoppingList { get; set; } = null!;
 
         public void Update(CreateUpdateShoppingItemDto shoppingItemDto)

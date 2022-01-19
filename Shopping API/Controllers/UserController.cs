@@ -20,6 +20,13 @@ namespace Shopping_API.Controllers
             _logger = logger;
             _userService = shoppingListService;
         }
+        [HttpGet("{id}", Name = "Get User")]
+        public async Task<ActionResult<User>> GetUser([FromRoute] Guid id)
+        {
+            var user = await _userService.GetUser(id);
+
+            return Ok(new UserDto(user));
+        }
 
         [HttpPost("", Name = "Create User")]
         public async Task<ActionResult<User>> CreateUser([FromBody] CreateUserDto createUserDto)

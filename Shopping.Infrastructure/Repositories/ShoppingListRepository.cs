@@ -128,5 +128,21 @@ namespace Shopping.Infrastructure.Repositories
 
             return shoppingListReport;
         }
+
+        public IQueryable<ShoppingListDto> ConvertToShoppingListDtoQueryable(IQueryable<ShoppingList> shoppingListQueryable)
+        {
+            return shoppingListQueryable
+                .AsNoTracking()
+                .Select(x =>
+                    new ShoppingListDto()
+                    {
+                        Id = x.Id,
+                        UserId = x.UserId,
+                        ShoppingListTotalValue = x.ShoppingListTotalValue,
+                        ShoppingItems = x.ShoppingItems.Select(
+                            x => new ShoppingItemDto(x)
+                        ).ToList()
+                    });
+        }
     }
 }

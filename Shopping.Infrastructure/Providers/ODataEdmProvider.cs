@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
+using Shopping.Domain.DTOs;
 using Shopping.Domain.Entities;
 
 namespace Shopping.Infrastructure.Providers
@@ -15,6 +16,7 @@ namespace Shopping.Infrastructure.Providers
             EdmModelBuilder = new ODataConventionModelBuilder();
 
             AddUserConfiguration();
+            AddShoppingListConfiguration();
         }
         public IEdmModel GetEdmModel()
         {
@@ -27,7 +29,21 @@ namespace Shopping.Infrastructure.Providers
             var entityType = configuration.EntityType;
 
             entityType.HasKey(x => x.Id);
+
             entityType.Property(x => x.Name);
+        }
+
+        private void AddShoppingListConfiguration()
+        {
+            var configuration = EdmModelBuilder.EntitySet<ShoppingListDto>("ShoppingList");
+            var entityType = configuration.EntityType;
+
+            entityType.HasKey(x => x.Id);
+
+            entityType.CollectionProperty(x => x.ShoppingItems);
+
+            entityType.Property(x => x.UserId);
+            entityType.Property(x => x.ShoppingListTotalValue);
         }
     }
 }

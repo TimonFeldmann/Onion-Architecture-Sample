@@ -13,7 +13,9 @@ namespace Shopping.Domain.Generic
         }
 
         public Guid Id { get; private set; }
+        [NotMapped]
         public List<INotification> DomainEvents { get; protected set; } = new List<INotification>();
+        [NotMapped]
         public List<INotification> IntegrationEvents { get; protected set; } = new List<INotification>();
 
         protected void AddDomainEvent(INotification domainEvent)

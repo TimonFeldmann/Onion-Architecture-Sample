@@ -17,5 +17,6 @@ namespace Shopping.RepositoryInterface.Repositories
         Task<ShoppingItem> UpdateShoppingListItem(Guid shoppingListId, Guid shoppingListItemId, CreateUpdateShoppingItemDto shoppingItemDto);
         Task<ShoppingListReport> UpdateShoppingListReport(ShoppingListUpdatedEvent shoppingListUpdateEvent);
         Task<ShoppingListReport> UpdateShoppingListReportUser(Guid shoppingListReportId, UserUpdatedEvent userUpdatedEvent);
+        IQueryable<ShoppingListDto> ConvertToShoppingListDtoQueryable(IQueryable<ShoppingList> shoppingListQueryable);
     }
 }

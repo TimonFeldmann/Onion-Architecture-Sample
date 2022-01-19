@@ -21,6 +21,11 @@ namespace Shopping.Service.Services
             return UserRepository.GetUsersQueryable();
         }
 
+        public async Task<User> GetUser(Guid id)
+        {
+            return await UserRepository.GetUserById(id);
+        }
+
         public async Task<User> CreateUser(CreateUserDto createUserDto)
         {
             var user = UserRepository.CreateUser(createUserDto);

@@ -22,6 +22,10 @@ namespace Shopping.Domain.Entities
             get => ShoppingItems
                 .Select(x => x.Price)
                 .Aggregate((decimal)0, (agggregate, current) => agggregate + current);
+            private set
+            {
+
+            }
         }
 
         public ShoppingItem AddShoppingItem(CreateUpdateShoppingItemDto shoppingItemDto)
