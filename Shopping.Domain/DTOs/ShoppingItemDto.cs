@@ -9,6 +9,7 @@ namespace Shopping.Domain.DTOs
         public string Name { get; set; } = null!;
         public decimal Price { get; set; }
 
+        public ShoppingItemDto() { }
         public ShoppingItemDto(ShoppingItem shoppingItem)
         {
             Id = shoppingItem.Id;

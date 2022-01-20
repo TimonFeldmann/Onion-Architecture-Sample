@@ -58,7 +58,11 @@ namespace Shopping.Infrastructure.Repositories
         {
             return userQueryable
                 .AsNoTracking()
-                .Select(x => new UserDto(x));
+                .Select(x => new UserDto()
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                });
         }
     }
 }

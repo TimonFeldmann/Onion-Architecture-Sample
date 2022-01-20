@@ -7,6 +7,7 @@ namespace Shopping.Domain.DTOs
         public Guid Id { get; set; }
         public string Name { get; set; } = null!;
 
+        public UserDto() { }
         public UserDto(User user)
         {
             Id = user.Id;

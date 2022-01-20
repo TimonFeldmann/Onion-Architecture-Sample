@@ -140,7 +140,13 @@ namespace Shopping.Infrastructure.Repositories
                         UserId = x.UserId,
                         ShoppingListTotalValue = x.ShoppingListTotalValue,
                         ShoppingItems = x.ShoppingItems.Select(
-                            x => new ShoppingItemDto(x)
+                            x2 => new ShoppingItemDto()
+                            {
+                                Id = x2.Id,
+                                Name = x2.Name,
+                                Price = x2.Price,
+                                ShoppingListId = x2.ShoppingListId
+                            }
                         ).ToList()
                     });
         }
