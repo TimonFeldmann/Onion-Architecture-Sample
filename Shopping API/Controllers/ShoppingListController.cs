@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.OData.Routing.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Shopping.Domain.DTOs;
 using Shopping.Domain.Entities;
+using Shopping.Domain.View_Entities;
 using Shopping.RepositoryInterface.Contexts;
 using Shopping.Service.Services;
 
@@ -84,7 +85,7 @@ namespace Shopping_API.Controllers
 
         [EnableQuery]
         [HttpGet("/odata/ShoppingListReport")]
-        public IQueryable<ShoppingListDto> GetODataShoppingListReport()
+        public IQueryable<ShoppingListReport> GetODataShoppingListReport()
         {
             return ShoppinggListService.GetShoppingListReportQueryable();
         }
