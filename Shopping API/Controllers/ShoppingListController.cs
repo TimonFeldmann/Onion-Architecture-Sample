@@ -77,16 +77,16 @@ namespace Shopping_API.Controllers
 
         [EnableQuery]
         [HttpGet("/odata/ShoppingList")]
-        public ActionResult<IQueryable<ShoppingListDto>> GetODataShoppingList()
+        public IQueryable<ShoppingListDto> GetODataShoppingList()
         {
-            return Ok(ShoppinggListService.GetShoppingListDtoQueryable());
+            return ShoppinggListService.GetShoppingListDtoQueryable();
         }
 
         [EnableQuery]
         [HttpGet("/odata/ShoppingListReport")]
-        public ActionResult<IQueryable<ShoppingListDto>> GetODataShoppingListReport()
+        public IQueryable<ShoppingListDto> GetODataShoppingListReport()
         {
-            return Ok(ShoppinggListService.GetShoppingListReportQueryable());
+            return ShoppinggListService.GetShoppingListReportQueryable();
         }
     }
 }
